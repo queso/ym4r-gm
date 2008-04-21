@@ -220,6 +220,19 @@ module Ym4r
         end
       end
       
+      # Simple GDirections support
+      def directions(div, dir_points)
+        @init << "dir_div = document.getElementById('#{div}');"
+        @init << "directions = new GDirections(#{@variable}, dir_div);"
+        @init << "dir_point_array = new Array;"
+        dir_points.each do |d|    
+            @init << "dir_point_array.push('#{d}');"
+        end
+        # Error Handling
+        @init << "GEvent.addListener(directions, 'error', handleErrors);"
+        
+        @init << "directions.loadFromWaypoints(dir_point_array);"
+      end
       #Outputs the initialization code for the map. By default, it outputs the script tags, performs the initialization in response to the onload event of the window and makes the map globally available. If you pass +true+ to the option key <tt>:full</tt>, the map will be setup in full screen, in which case it is not necessary (but not harmful) to set a size for the map div.
       def to_html(options = {})
         no_load = options[:no_load]
