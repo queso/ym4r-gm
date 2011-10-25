@@ -117,6 +117,10 @@ module Ym4r
         @variable
       end
       #Returns the expression inside the Variable followed by a ";"
+      def to_str 
+        @variable + ";" 
+      end
+      #Returns the expression inside the Variable followed by a ";"
       def to_s
         @variable + ";"
       end
